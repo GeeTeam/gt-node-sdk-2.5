@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>用户中心</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .item {
+            margin: 0 auto;
+            width: 600px;
+            padding: 30px;
+            border: 1px solid gray;
+            box-shadow: 0 0 5px 0 gray;
+        }
+        textarea {
+            padding: 10px;
+            border: 1px solid gray;
+            font-size: 16px;
+            width: 100%;
+            height: 150px;
+            resize: none;
+        }
+        textarea:focus {
+            border-color: gold;
+            box-shadow: 0 0 5px 0 gold;
+        }
+        button {
+            font-size: 18px;
+            height: 40px;
+            width: 160px;
+        }
+        input {
+            height: 30px;
+            line-height: 30px;
+            padding: 0 10px;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+<br><br>
+<div class="item">
+    <h3>评论行为</h3>
+    <p>极验是令恶意程序敬畏、用户喜爱的验证安全体系</p>
+    <p><textarea id="comment-content" placeholder="那么您认为极验如何呢？"></textarea></p>
+    <p><button id="comment">评论</button></p>
+</div>
+<br><br>
+<div class="item">
+    <h3>购买行为</h3>
+    <p>接入极验，价格：￥xxx</p>
+    <p>数量：<input id="number" type="number" value="1"></p>
+    <p><button id="buy">购买</button></p>
+</div>
+<!-- 为使用方便，直接使用jquery.js库 -->
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script>
+    $('#comment').click(function () {
+        if ($('#comment-content').val() == '') {
+            alert('请输入评论');
+            return;
+        }
+
+        $.ajax({
+            url: '/comment',
+            type: 'post',
+            data: {
+                comment: $('#comment-content').val()
+            },
+            success: function () {
+                alert('评论成功')
+            }
+        });
+    });
+
+    $('#buy').click(function () {
+        if ($('#number').val() == '') {
+            alert('请输入评论');
+            return;
+        }
+
+        $.ajax({
+            url: '/buy',
+            type: 'post',
+            data: {
+                number: $('#number').val()
+            },
+            success: function () {
+                alert('购买成功')
+            }
+        });
+    });
+</script>
+</body>
+</html>
